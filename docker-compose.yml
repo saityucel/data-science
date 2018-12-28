@@ -1,19 +1,16 @@
 version: '2'
 
 services:
-  web:
+  data-science:
     build: .
     stdin_open: true
     tty: true
-    # command: ["/bin/bash", "/app/wait-for-postgres.sh", "postgres", "/bin/bash", "/app/entrypoint.sh"]
+    command: bash -c "sleep 5 && jupyter notebook --ip=0.0.0.0 --allow-root"
     volumes:
       - .:/data-science
       - ./notebooks:/opt/notebooks
     ports:
       - '127.0.0.1:8888:8888'
-    # links:
-    #   - redis:redis
-    #   - postgres:postgres
     network_mode: "bridge"
 volumes:
   notebooks:
